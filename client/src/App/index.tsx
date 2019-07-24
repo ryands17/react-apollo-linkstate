@@ -64,6 +64,10 @@ const App: React.FC = () => {
     [todos]
   )
 
+  const clearCompletedItems = useCallback(() => {
+    setTodos(todos.filter(todo => !todo.completed))
+  }, [todos])
+
   return (
     <Router>
       <div className="todoapp">
@@ -74,7 +78,7 @@ const App: React.FC = () => {
           removeTodo={removeTodo}
           toggleAllTodos={toggleAllTodos}
         />
-        <Footer todos={todos} />
+        <Footer todos={todos} clearCompleted={clearCompletedItems} />
       </div>
     </Router>
   )
