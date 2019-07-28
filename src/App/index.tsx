@@ -30,23 +30,32 @@ const App: React.FC = () => {
 
   const toggleTodo = useCallback(
     (index: number) => {
-      const updatedTodos = [...tasks]
-      updatedTodos[index].completed = !updatedTodos[index].completed
-      setTasks(updatedTodos)
+      const updatedTasks = [...tasks]
+      updatedTasks[index].completed = !updatedTasks[index].completed
+      setTasks(updatedTasks)
     },
     [tasks]
   )
 
-  const removeTodo = useCallback(
+  const editTask = useCallback(
+    ({ index, text }: { index: number; text: string }) => {
+      const updatedTasks = [...tasks]
+      updatedTasks[index].text = text
+      setTasks(updatedTasks)
+    },
+    [tasks]
+  )
+
+  const removeTask = useCallback(
     (index: number) => {
-      const updatedTodos = [...tasks]
-      updatedTodos.splice(index, 1)
-      setTasks(updatedTodos)
+      const updatedTasks = [...tasks]
+      updatedTasks.splice(index, 1)
+      setTasks(updatedTasks)
     },
     [tasks]
   )
 
-  const toggleAllTodos = useCallback(
+  const toggleAllTasks = useCallback(
     ({ completed }: { completed: boolean }) => {
       setTasks(
         tasks.map(todo => ({
@@ -69,8 +78,9 @@ const App: React.FC = () => {
         <Tasklist
           tasks={tasks}
           toggleTask={toggleTodo}
-          removeTask={removeTodo}
-          toggleAllTasks={toggleAllTodos}
+          editTask={editTask}
+          removeTask={removeTask}
+          toggleAllTasks={toggleAllTasks}
         />
         <Footer tasks={tasks} clearCompleted={clearCompletedItems} />
       </div>
