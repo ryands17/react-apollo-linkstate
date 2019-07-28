@@ -1,29 +1,23 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { HashRouter as Router } from 'react-router-dom'
 import './app.css'
 import Header from 'components/Header'
-import { Todo } from 'config/types'
+import { Task } from 'config/types'
 import Footer from 'components/Footer'
-import Todolist from 'components/Todolist'
+import Tasklist from 'components/Tasklist'
+import { fetchTasks } from 'config/utils'
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([
-    {
-      id: Math.random(),
-      text: 'Learn Hooks',
-      completed: true,
-    },
-    {
-      id: Math.random(),
-      text: 'Learn Apollo GQL',
-      completed: false,
-    },
-  ])
+  let [tasks, setTasks] = useState<Task[]>(fetchTasks())
 
-  const createTodo = useCallback(
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
+
+  const createTask = useCallback(
     text => {
-      setTodos([
-        ...todos,
+      setTasks([
+        ...tasks,
         {
           id: Math.random(),
           text,
@@ -31,54 +25,54 @@ const App: React.FC = () => {
         },
       ])
     },
-    [todos]
+    [tasks]
   )
 
   const toggleTodo = useCallback(
     (index: number) => {
-      const updatedTodos = [...todos]
+      const updatedTodos = [...tasks]
       updatedTodos[index].completed = !updatedTodos[index].completed
-      setTodos(updatedTodos)
+      setTasks(updatedTodos)
     },
-    [todos]
+    [tasks]
   )
 
   const removeTodo = useCallback(
     (index: number) => {
-      const updatedTodos = [...todos]
+      const updatedTodos = [...tasks]
       updatedTodos.splice(index, 1)
-      setTodos(updatedTodos)
+      setTasks(updatedTodos)
     },
-    [todos]
+    [tasks]
   )
 
   const toggleAllTodos = useCallback(
     ({ completed }: { completed: boolean }) => {
-      setTodos(
-        todos.map(todo => ({
+      setTasks(
+        tasks.map(todo => ({
           ...todo,
           completed,
         }))
       )
     },
-    [todos]
+    [tasks]
   )
 
   const clearCompletedItems = useCallback(() => {
-    setTodos(todos.filter(todo => !todo.completed))
-  }, [todos])
+    setTasks(tasks.filter(todo => !todo.completed))
+  }, [tasks])
 
   return (
     <Router>
       <div className="todoapp">
-        <Header createTodo={createTodo} />
-        <Todolist
-          todos={todos}
-          toggleTodo={toggleTodo}
-          removeTodo={removeTodo}
-          toggleAllTodos={toggleAllTodos}
+        <Header createTask={createTask} />
+        <Tasklist
+          tasks={tasks}
+          toggleTask={toggleTodo}
+          removeTask={removeTodo}
+          toggleAllTasks={toggleAllTodos}
         />
-        <Footer todos={todos} clearCompleted={clearCompletedItems} />
+        <Footer tasks={tasks} clearCompleted={clearCompletedItems} />
       </div>
     </Router>
   )

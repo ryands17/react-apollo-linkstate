@@ -1,20 +1,20 @@
 import React, { useMemo } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { Todo } from 'config/types'
+import { Task } from 'config/types'
 
 type FooterProps = {
   location?: any
-  todos: Todo[]
+  tasks: Task[]
   clearCompleted: () => void
 }
 
-const Footer: React.FC<FooterProps> = ({ location, todos, clearCompleted }) => {
+const Footer: React.FC<FooterProps> = ({ location, tasks, clearCompleted }) => {
   let remainingItems = useMemo(
-    () => todos.filter(todo => !todo.completed).length,
-    [todos]
+    () => tasks.filter(task => !task.completed).length,
+    [tasks]
   )
 
-  return todos.length ? (
+  return tasks.length ? (
     <footer className="footer">
       <span className="todo-count">
         <strong>{remainingItems}</strong>{' '}

@@ -2,25 +2,25 @@ import React, { useState } from 'react'
 import { ENTER } from 'config/utils'
 
 type HeaderProps = {
-  createTodo: (text: string) => void
+  createTask: (text: string) => void
 }
 
-const Header: React.FC<HeaderProps> = ({ createTodo }) => {
-  let [text, setText] = useState<string>('')
+const Header: React.FC<HeaderProps> = ({ createTask }) => {
+  let [task, setTask] = useState<string>('')
 
   return (
     <header className="header">
-      <h1 style={{ textTransform: 'uppercase' }}>todos</h1>
+      <h1 style={{ textTransform: 'uppercase' }}>tasks</h1>
       <input
         className="new-todo"
-        onChange={({ target }) => setText(target.value)}
+        onChange={({ target }) => setTask(target.value)}
         onKeyPress={({ key }) => {
           if (key === ENTER) {
-            createTodo(text)
-            setText('')
+            createTask(task)
+            setTask('')
           }
         }}
-        value={text}
+        value={task}
         placeholder="What needs to be done?"
       />
     </header>
