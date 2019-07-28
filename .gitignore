@@ -8,6 +8,9 @@ node_modules
 # testing
 coverage
 
+# apollo codegen
+src/generated
+
 # production
 build
 

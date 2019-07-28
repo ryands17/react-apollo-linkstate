@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react'
-import cx from 'classnames'
 import { withRouter } from 'react-router-dom'
+import cx from 'classnames'
+import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks'
 import { Task } from 'config/types'
 import { ESCAPE_KEY, ENTER_KEY } from 'config/utils'
 
@@ -13,7 +15,17 @@ type TodolistProps = {
   location?: any
 }
 
-const Todolist: React.FC<TodolistProps> = ({
+const FETCH_TASKS = gql`
+  query Tasks {
+    tasks @client {
+      id
+      text
+      completed
+    }
+  }
+`
+
+const Tasklist: React.FC<TodolistProps> = ({
   tasks,
   toggleTask,
   removeTask,
@@ -21,6 +33,9 @@ const Todolist: React.FC<TodolistProps> = ({
   editTask,
   location,
 }) => {
+  const { data } = useQuery(FETCH_TASKS)
+  console.log({ data })
+
   const inputRef = useRef<HTMLInputElement>(null)
   const [isEditing, setIsEditing] = useState(false)
   const [editText, setEditText] = useState('')
@@ -137,4 +152,4 @@ const Todolist: React.FC<TodolistProps> = ({
   ) : null
 }
 
-export default withRouter(Todolist)
+export default withRouter(Tasklist)
