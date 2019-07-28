@@ -1,18 +1,12 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import { HashRouter as Router } from 'react-router-dom'
 import './app.css'
 import Header from 'components/Header'
-import { Task } from 'config/types'
 import Footer from 'components/Footer'
 import Tasklist from 'components/Tasklist'
-import { fetchTasks } from 'config/utils'
 
 const App: React.FC = () => {
-  let [tasks, setTasks] = useState<Task[]>(fetchTasks())
-
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
+  let [tasks, setTasks] = useState<Array<any>>([])
 
   const createTask = useCallback(
     text => {

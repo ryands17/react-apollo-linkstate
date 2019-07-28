@@ -23,6 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "generate:client:schema": "npx apollo client:codegen src/generated --target=typescript --outputFlat",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,6 +50,10 @@
     "@types/classnames": "^2.2.9",
     "@types/graphql": "^14.2.3",
     "@types/react-router-dom": "^4.3.4",
+    "apollo": "^2.16.2",
+    "husky": "^3.0.1",
+    "lint-staged": "^9.2.1",
+    "prettier": "^1.18.2",
     "typesync": "^0.5.2"
   }
 }
