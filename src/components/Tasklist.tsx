@@ -1,18 +1,17 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 import cx from 'classnames'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { Task } from 'config/types'
 import { ESCAPE_KEY, ENTER_KEY } from 'config/utils'
 
-type TodolistProps = {
+type TasklistProps = RouteComponentProps & {
   tasks: Task[]
   toggleTask: (index: number) => void
   removeTask: (index: number) => void
   toggleAllTasks: (params: { completed: boolean }) => void
   editTask: (params: { index: number; text: string }) => void
-  location?: any
 }
 
 const FETCH_TASKS = gql`
@@ -25,7 +24,7 @@ const FETCH_TASKS = gql`
   }
 `
 
-const Tasklist: React.FC<TodolistProps> = ({
+const Tasklist: React.FC<TasklistProps> = ({
   tasks,
   toggleTask,
   removeTask,

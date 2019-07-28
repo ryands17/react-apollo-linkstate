@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
 import { Task } from 'config/types'
 
-type FooterProps = {
+type FooterProps = RouteComponentProps & {
   location?: any
   tasks: Task[]
   clearCompleted: () => void
