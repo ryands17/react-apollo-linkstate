@@ -10,10 +10,6 @@ import { editTask, editTaskVariables } from 'generated/editTask'
 import { toggleTask, toggleTaskVariables } from 'generated/toggleTask'
 import { toggleAllTasks } from 'generated/toggleAllTasks'
 
-type TasklistProps = RouteComponentProps & {
-  editTask: (params: { index: number; text: string }) => void
-}
-
 export const FETCH_TASKS = gql`
   query Tasks {
     tasks @client {
@@ -56,7 +52,7 @@ const TOGGLE_ALL_TASKS = gql`
   }
 `
 
-const Tasklist: React.FC<TasklistProps> = ({ location }) => {
+const Tasklist: React.FC<RouteComponentProps> = ({ location }) => {
   const { data } = useQuery<Tasks>(FETCH_TASKS)
   const [removeTaskMutation] = useMutation<removeTask, removeTaskVariables>(
     REMOVE_TASK
@@ -127,7 +123,7 @@ const Tasklist: React.FC<TasklistProps> = ({ location }) => {
     }
   }, [isEditing])
 
-  return data && data.tasks ? (
+  return (
     <section className="main">
       <input
         onChange={() => toggleAllTasksMutation()}
@@ -137,71 +133,72 @@ const Tasklist: React.FC<TasklistProps> = ({ location }) => {
       />
       <label htmlFor="toggle-all">Mark all as complete</label>
       <ul className="todo-list">
-        {data.tasks
-          .filter(task => {
-            if (location.pathname === '/completed') {
-              return task.completed
-            }
-            if (location.pathname === '/active') {
-              return !task.completed
-            }
-            return true
-          })
-          .map(task => (
-            <li
-              key={task.id}
-              className={cx({
-                completed: task.completed,
-                editing: editId === task.id && isEditing,
-              })}
-            >
-              <div className="view">
-                <input
-                  className="toggle"
-                  onChange={() =>
-                    toggleTaskMutation({
-                      variables: {
-                        id: task.id,
-                      },
-                    })
-                  }
-                  checked={task.completed}
-                  readOnly
-                  type="checkbox"
-                />
-                <label
-                  onDoubleClick={() =>
-                    handleEdit({ text: task.text, id: task.id })
-                  }
-                >
-                  {task.text}
-                </label>
-                <button
-                  className="destroy"
-                  onClick={() =>
-                    removeTaskMutation({
-                      variables: {
-                        id: task.id,
-                      },
-                    })
-                  }
-                />
-              </div>
-              {editId && (
-                <input
-                  className="edit"
-                  ref={inputRef}
-                  value={editText}
-                  onChange={handleChange}
-                  onBlur={() => handleSubmit(task.id)}
-                  onKeyUp={({ which }) => handleKeyUp({ which, id: task.id })}
-                />
-              )}
-            </li>
-          ))}
+        {data &&
+          data.tasks
+            .filter(task => {
+              if (location.pathname === '/completed') {
+                return task.completed
+              }
+              if (location.pathname === '/active') {
+                return !task.completed
+              }
+              return true
+            })
+            .map(task => (
+              <li
+                key={task.id}
+                className={cx({
+                  completed: task.completed,
+                  editing: editId === task.id && isEditing,
+                })}
+              >
+                <div className="view">
+                  <input
+                    className="toggle"
+                    onChange={() =>
+                      toggleTaskMutation({
+                        variables: {
+                          id: task.id,
+                        },
+                      })
+                    }
+                    checked={task.completed}
+                    readOnly
+                    type="checkbox"
+                  />
+                  <label
+                    onDoubleClick={() =>
+                      handleEdit({ text: task.text, id: task.id })
+                    }
+                  >
+                    {task.text}
+                  </label>
+                  <button
+                    className="destroy"
+                    onClick={() =>
+                      removeTaskMutation({
+                        variables: {
+                          id: task.id,
+                        },
+                      })
+                    }
+                  />
+                </div>
+                {editId && (
+                  <input
+                    className="edit"
+                    ref={inputRef}
+                    value={editText}
+                    onChange={handleChange}
+                    onBlur={() => handleSubmit(task.id)}
+                    onKeyUp={({ which }) => handleKeyUp({ which, id: task.id })}
+                  />
+                )}
+              </li>
+            ))}
       </ul>
     </section>
-  ) : null
+  )
 }
 
 export default withRouter(Tasklist)

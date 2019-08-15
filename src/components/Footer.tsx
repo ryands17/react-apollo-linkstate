@@ -1,24 +1,25 @@
 import React, { useMemo } from 'react'
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
+import { useQuery } from '@apollo/react-hooks'
+import { Tasks } from 'generated/Tasks'
+import { FETCH_TASKS } from './Tasklist'
 
-type FooterProps = RouteComponentProps & {
-  location?: any
-  tasks: Array<any>
-  clearCompleted: () => void
-}
+const Footer: React.FC<RouteComponentProps> = ({ location }) => {
+  const { data } = useQuery<Tasks>(FETCH_TASKS)
 
-const Footer: React.FC<FooterProps> = ({ location, tasks, clearCompleted }) => {
   let remainingItems = useMemo(
-    () => tasks.filter(task => !task.completed).length,
-    [tasks]
+    () => data && data.tasks.filter(task => !task.completed).length,
+    [data]
   )
 
-  return tasks.length ? (
+  return data && data.tasks.length ? (
     <footer className="footer">
-      <span className="todo-count">
-        <strong>{remainingItems}</strong>{' '}
-        {remainingItems === 1 ? `item` : `items`} left
-      </span>
+      {remainingItems && (
+        <span className="todo-count">
+          <strong>{remainingItems}</strong>{' '}
+          {remainingItems === 1 ? `item` : `items`} left
+        </span>
+      )}
       <ul className="filters">
         <li>
           <Link
@@ -47,9 +48,8 @@ const Footer: React.FC<FooterProps> = ({ location, tasks, clearCompleted }) => {
           </Link>
         </li>
       </ul>
-      <button className="clear-completed" onClick={clearCompleted}>
-        Clear completed
-      </button>
+      {/* TODO: add clear completed mutation */}
+      <button className="clear-completed">Clear completed</button>
     </footer>
   ) : null
 }
