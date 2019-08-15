@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react'
 import { HashRouter as Router } from 'react-router-dom'
+
 import './app.css'
+
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Tasklist from 'components/Tasklist'
@@ -22,41 +24,11 @@ const App: React.FC = () => {
     [tasks]
   )
 
-  const toggleTodo = useCallback(
-    (index: number) => {
-      const updatedTasks = [...tasks]
-      updatedTasks[index].completed = !updatedTasks[index].completed
-      setTasks(updatedTasks)
-    },
-    [tasks]
-  )
-
   const editTask = useCallback(
     ({ index, text }: { index: number; text: string }) => {
       const updatedTasks = [...tasks]
       updatedTasks[index].text = text
       setTasks(updatedTasks)
-    },
-    [tasks]
-  )
-
-  const removeTask = useCallback(
-    (index: number) => {
-      const updatedTasks = [...tasks]
-      updatedTasks.splice(index, 1)
-      setTasks(updatedTasks)
-    },
-    [tasks]
-  )
-
-  const toggleAllTasks = useCallback(
-    ({ completed }: { completed: boolean }) => {
-      setTasks(
-        tasks.map(todo => ({
-          ...todo,
-          completed,
-        }))
-      )
     },
     [tasks]
   )
@@ -69,13 +41,7 @@ const App: React.FC = () => {
     <Router>
       <div className="todoapp">
         <Header createTask={createTask} />
-        <Tasklist
-          tasks={tasks}
-          toggleTask={toggleTodo}
-          editTask={editTask}
-          removeTask={removeTask}
-          toggleAllTasks={toggleAllTasks}
-        />
+        <Tasklist editTask={editTask} />
         <Footer tasks={tasks} clearCompleted={clearCompletedItems} />
       </div>
     </Router>

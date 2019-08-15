@@ -1,7 +1,9 @@
 import { InMemoryCache } from 'apollo-boost'
 import { uuidv4 } from 'config/utils'
 
-export const initializeData = (cache: InMemoryCache) => {
+export const cache = new InMemoryCache()
+
+export const initializeData = () => {
   cache.writeData({
     data: {
       tasks: [
@@ -21,5 +23,7 @@ export const initializeData = (cache: InMemoryCache) => {
     },
   })
 }
+
+initializeData()
 
 export const resolvers = {}

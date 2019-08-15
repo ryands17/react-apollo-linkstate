@@ -7,10 +7,6 @@ import { ESCAPE_KEY, ENTER_KEY } from 'config/utils'
 import { Tasks } from 'generated/Tasks'
 
 type TasklistProps = RouteComponentProps & {
-  tasks: Array<any>
-  toggleTask: (index: number) => void
-  removeTask: (index: number) => void
-  toggleAllTasks: (params: { completed: boolean }) => void
   editTask: (params: { index: number; text: string }) => void
 }
 
@@ -24,14 +20,7 @@ const FETCH_TASKS = gql`
   }
 `
 
-const Tasklist: React.FC<TasklistProps> = ({
-  tasks,
-  toggleTask,
-  removeTask,
-  toggleAllTasks,
-  editTask,
-  location,
-}) => {
+const Tasklist: React.FC<TasklistProps> = ({ editTask, location }) => {
   const { data } = useQuery<Tasks>(FETCH_TASKS)
 
   const inputRef = useRef<HTMLInputElement>(null)

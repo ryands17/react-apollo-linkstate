@@ -1,28 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ApolloClient, { InMemoryCache } from 'apollo-boost'
+import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
+
 import 'todomvc-app-css/index.css'
 import 'index.css'
-import App from 'App'
-import { initializeData } from 'linkState'
 
-const cache = new InMemoryCache()
+import App from 'App'
+import { initializeData, cache, resolvers } from 'linkState'
 
 const client = new ApolloClient({
   cache,
-  resolvers: {},
+  resolvers,
 })
 
 client.onClearStore(async () => {
-  initializeData(cache)
+  initializeData()
 })
 
 client.onResetStore(async () => {
-  initializeData(cache)
+  initializeData()
 })
-
-initializeData(cache)
 
 ReactDOM.render(
   <ApolloProvider client={client}>
