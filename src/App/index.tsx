@@ -10,20 +10,6 @@ import Tasklist from 'components/Tasklist'
 const App: React.FC = () => {
   let [tasks, setTasks] = useState<Array<any>>([])
 
-  const createTask = useCallback(
-    text => {
-      setTasks([
-        ...tasks,
-        {
-          id: Math.random(),
-          text,
-          completed: false,
-        },
-      ])
-    },
-    [tasks]
-  )
-
   const editTask = useCallback(
     ({ index, text }: { index: number; text: string }) => {
       const updatedTasks = [...tasks]
@@ -40,7 +26,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="todoapp">
-        <Header createTask={createTask} />
+        <Header />
         <Tasklist editTask={editTask} />
         <Footer tasks={tasks} clearCompleted={clearCompletedItems} />
       </div>

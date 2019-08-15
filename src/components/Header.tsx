@@ -1,12 +1,20 @@
 import React, { useState } from 'react'
+import gql from 'graphql-tag'
 import { ENTER } from 'config/utils'
+import { useMutation } from '@apollo/react-hooks'
+import { addTask, addTaskVariables } from 'generated/addTask'
 
-type HeaderProps = {
-  createTask: (text: string) => void
-}
+const ADD_TASK = gql`
+  mutation addTask($text: String!) {
+    addTask(text: $text) @client {
+      id
+    }
+  }
+`
 
-const Header: React.FC<HeaderProps> = ({ createTask }) => {
+const Header: React.FC = () => {
   let [task, setTask] = useState<string>('')
+  let [addTaskMutation] = useMutation<addTask, addTaskVariables>(ADD_TASK)
 
   return (
     <header className="header">
@@ -15,8 +23,12 @@ const Header: React.FC<HeaderProps> = ({ createTask }) => {
         className="new-todo"
         onChange={({ target }) => setTask(target.value)}
         onKeyPress={({ key }) => {
-          if (key === ENTER) {
-            createTask(task)
+          if (key === ENTER && task.trim()) {
+            addTaskMutation({
+              variables: {
+                text: task,
+              },
+            })
             setTask('')
           }
         }}

@@ -23,7 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "generate:client:schema": "npx apollo client:codegen src/generated --target=typescript --outputFlat",
+    "generate:client:schema": "apollo client:codegen src/generated --target=typescript --outputFlat",
     "eject": "react-scripts eject",
     "postinstall": "npm run generate:client:schema"
   },

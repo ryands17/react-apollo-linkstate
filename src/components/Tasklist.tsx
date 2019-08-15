@@ -2,15 +2,19 @@ import React, { useState, useCallback, useRef, useEffect } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import cx from 'classnames'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { ESCAPE_KEY, ENTER_KEY } from 'config/utils'
 import { Tasks } from 'generated/Tasks'
+import { removeTask, removeTaskVariables } from 'generated/removeTask'
+import { editTask, editTaskVariables } from 'generated/editTask'
+import { toggleTask, toggleTaskVariables } from 'generated/toggleTask'
+import { toggleAllTasks } from 'generated/toggleAllTasks'
 
 type TasklistProps = RouteComponentProps & {
   editTask: (params: { index: number; text: string }) => void
 }
 
-const FETCH_TASKS = gql`
+export const FETCH_TASKS = gql`
   query Tasks {
     tasks @client {
       id
@@ -20,31 +24,78 @@ const FETCH_TASKS = gql`
   }
 `
 
-const Tasklist: React.FC<TasklistProps> = ({ editTask, location }) => {
+const REMOVE_TASK = gql`
+  mutation removeTask($id: ID!) {
+    removeTask(id: $id) @client {
+      id
+    }
+  }
+`
+
+const EDIT_TASK = gql`
+  mutation editTask($id: ID!, $text: String!) {
+    editTask(id: $id, text: $text) @client {
+      id
+    }
+  }
+`
+
+const TOGGLE_TASK = gql`
+  mutation toggleTask($id: ID!) {
+    toggleTask(id: $id) @client {
+      id
+    }
+  }
+`
+
+const TOGGLE_ALL_TASKS = gql`
+  mutation toggleAllTasks {
+    toggleAllTasks @client {
+      id
+    }
+  }
+`
+
+const Tasklist: React.FC<TasklistProps> = ({ location }) => {
   const { data } = useQuery<Tasks>(FETCH_TASKS)
+  const [removeTaskMutation] = useMutation<removeTask, removeTaskVariables>(
+    REMOVE_TASK
+  )
+  const [editTaskMutation] = useMutation<editTask, editTaskVariables>(EDIT_TASK)
+  const [toggleTaskMutation] = useMutation<toggleTask, toggleTaskVariables>(
+    TOGGLE_TASK
+  )
+  const [toggleAllTasksMutation] = useMutation<toggleAllTasks>(TOGGLE_ALL_TASKS)
 
   const inputRef = useRef<HTMLInputElement>(null)
   const [isEditing, setIsEditing] = useState(false)
   const [editText, setEditText] = useState('')
-  const [editIndex, setEditIndex] = useState<number | null>(null)
+  const [editId, setEditId] = useState<string | null>(null)
 
   const handleEdit = useCallback(
-    ({ text, index }: { text: string; index: number }) => {
+    ({ text, id }: { text: string; id: string }) => {
       setIsEditing(true)
       setEditText(text)
-      setEditIndex(index)
+      setEditId(id)
     },
     []
   )
 
   const handleSubmit = useCallback(
-    index => {
-      editTask({ index, text: editText })
-      setEditText('')
-      setIsEditing(false)
-      setEditIndex(null)
+    id => {
+      if (editText.trim()) {
+        editTaskMutation({
+          variables: {
+            id,
+            text: editText,
+          },
+        })
+        setEditText('')
+        setIsEditing(false)
+        setEditId(null)
+      }
     },
-    [editTask, editText]
+    [editText, editTaskMutation]
   )
 
   const handleChange = useCallback(
@@ -58,13 +109,13 @@ const Tasklist: React.FC<TasklistProps> = ({ editTask, location }) => {
   )
 
   const handleKeyUp = useCallback(
-    ({ which, index }) => {
+    ({ which, id }) => {
       if (which === ESCAPE_KEY) {
         setIsEditing(false)
         setEditText('')
-        setEditIndex(null)
+        setEditId(null)
       } else if (which === ENTER_KEY) {
-        handleSubmit(index)
+        handleSubmit(id)
       }
     },
     [handleSubmit]
@@ -79,15 +130,10 @@ const Tasklist: React.FC<TasklistProps> = ({ editTask, location }) => {
   return data && data.tasks ? (
     <section className="main">
       <input
+        onChange={() => toggleAllTasksMutation()}
         className="toggle-all"
         type="checkbox"
-        // onChange={() =>
-        //   tasks.some(task => !task.completed)
-        //     ? toggleAllTasks({ completed: true })
-        //     : toggleAllTasks({ completed: false })
-        // }
-        readOnly
-        checked={false}
+        defaultChecked={false}
       />
       <label htmlFor="toggle-all">Mark all as complete</label>
       <ul className="todo-list">
@@ -101,37 +147,54 @@ const Tasklist: React.FC<TasklistProps> = ({ editTask, location }) => {
             }
             return true
           })
-          .map((task, index) => (
+          .map(task => (
             <li
               key={task.id}
               className={cx({
                 completed: task.completed,
-                // editing: editIndex === index && isEditing,
+                editing: editId === task.id && isEditing,
               })}
             >
               <div className="view">
                 <input
                   className="toggle"
-                  // onChange={() => toggleTask(index)}
+                  onChange={() =>
+                    toggleTaskMutation({
+                      variables: {
+                        id: task.id,
+                      },
+                    })
+                  }
                   checked={task.completed}
                   readOnly
                   type="checkbox"
                 />
                 <label
-                // onDoubleClick={() => handleEdit({ text: task.text, index })}
+                  onDoubleClick={() =>
+                    handleEdit({ text: task.text, id: task.id })
+                  }
                 >
                   {task.text}
                 </label>
-                <button className="destroy" />
+                <button
+                  className="destroy"
+                  onClick={() =>
+                    removeTaskMutation({
+                      variables: {
+                        id: task.id,
+                      },
+                    })
+                  }
+                />
               </div>
-              {editIndex && (
+              {editId && (
                 <input
                   className="edit"
                   ref={inputRef}
-                  // value={editText}
-                  // onChange={handleChange}
-                  // onBlur={() => handleSubmit(index)}
-                  // onKeyUp={({ which }) => handleKeyUp({ which, index })}
+                  value={editText}
+                  onChange={handleChange}
+                  onBlur={() => handleSubmit(task.id)}
+                  onKeyUp={({ which }) => handleKeyUp({ which, id: task.id })}
                 />
               )}
             </li>

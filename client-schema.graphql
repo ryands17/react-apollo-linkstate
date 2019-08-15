@@ -7,3 +7,15 @@ type Task {
 type Query {
   tasks: [Task!]!
 }
+
+type Mutation {
+  addTask(text: String!): Task!
+
+  editTask(id: ID!, text: String!): Task!
+
+  removeTask(id: ID!): Task
+
+  toggleTask(id: ID!): Task
+
+  toggleAllTasks: [Task]
+}
