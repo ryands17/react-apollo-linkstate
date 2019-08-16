@@ -20,12 +20,12 @@
     "typescript": "3.5.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"npm run generate:schema -- --watch\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "generate:client:schema": "apollo client:codegen src/generated --target=typescript --outputFlat",
     "eject": "react-scripts eject",
-    "postinstall": "npm run generate:client:schema"
+    "postinstall": "npm run generate:schema",
+    "generate:schema": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,13 +48,28 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.6.1",
+    "@graphql-codegen/typescript": "1.6.1",
+    "@graphql-codegen/typescript-operations": "1.6.1",
     "@types/classnames": "^2.2.9",
     "@types/graphql": "^14.2.3",
     "@types/react-router-dom": "^4.3.4",
     "apollo": "^2.17.4",
+    "concurrently": "^4.1.1",
     "husky": "^3.0.3",
     "lint-staged": "^9.2.1",
     "prettier": "^1.18.2",
     "typesync": "^0.6.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,json,md,ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

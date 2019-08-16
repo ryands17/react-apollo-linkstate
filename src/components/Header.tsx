@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import gql from 'graphql-tag'
 import { ENTER } from 'config/utils'
 import { useMutation } from '@apollo/react-hooks'
-import { addTask, addTaskVariables } from 'generated/addTask'
+import { Mutation, MutationAddTaskArgs } from 'generated/graphql'
 
 const ADD_TASK = gql`
   mutation addTask($text: String!) {
@@ -13,26 +13,28 @@ const ADD_TASK = gql`
 `
 
 const Header: React.FC = () => {
-  let [task, setTask] = useState<string>('')
-  let [addTaskMutation] = useMutation<addTask, addTaskVariables>(ADD_TASK)
+  let [text, setText] = useState<string>('')
+  let [addTaskMutation] = useMutation<Mutation['addTask'], MutationAddTaskArgs>(
+    ADD_TASK
+  )
 
   return (
     <header className="header">
       <h1 style={{ textTransform: 'uppercase' }}>tasks</h1>
       <input
         className="new-todo"
-        onChange={({ target }) => setTask(target.value)}
+        onChange={({ target }) => setText(target.value)}
         onKeyPress={({ key }) => {
-          if (key === ENTER && task.trim()) {
+          if (key === ENTER && text.trim()) {
             addTaskMutation({
               variables: {
-                text: task,
+                text,
               },
             })
-            setTask('')
+            setText('')
           }
         }}
-        value={task}
+        value={text}
         placeholder="What needs to be done?"
       />
     </header>

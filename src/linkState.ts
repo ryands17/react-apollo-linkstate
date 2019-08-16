@@ -1,7 +1,7 @@
 import { InMemoryCache, Resolvers } from 'apollo-boost'
 import { uuidv4 } from 'config/utils'
 import { FETCH_TASKS } from 'components/Tasklist'
-import { Tasks_tasks, Tasks } from 'generated/Tasks'
+import { Query as Tasks, Task } from 'generated/graphql'
 
 export const cache = new InMemoryCache()
 
@@ -39,7 +39,7 @@ export const resolvers: Resolvers = {
         query: FETCH_TASKS,
       })
 
-      const newTask: Tasks_tasks = {
+      const newTask: Task = {
         __typename: 'Task',
         id: uuidv4(),
         text,
@@ -139,6 +139,21 @@ export const resolvers: Resolvers = {
           completed: incompleteTasks,
         }))
 
+        cache.writeData({
+          data: {
+            tasks: newTasks,
+          },
+        })
+        return newTasks
+      } else return null
+    },
+    clearCompleted: (_, __, { cache: InMemoryCache }) => {
+      const data = cache.readQuery<Tasks>({
+        query: FETCH_TASKS,
+      })
+
+      if (data) {
+        let newTasks = data.tasks.filter(task => !task.completed)
         cache.writeData({
           data: {
             tasks: newTasks,

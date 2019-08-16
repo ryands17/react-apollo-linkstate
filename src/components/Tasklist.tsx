@@ -1,14 +1,16 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import cx from 'classnames'
 import gql from 'graphql-tag'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { ESCAPE_KEY, ENTER_KEY } from 'config/utils'
-import { Tasks } from 'generated/Tasks'
-import { removeTask, removeTaskVariables } from 'generated/removeTask'
-import { editTask, editTaskVariables } from 'generated/editTask'
-import { toggleTask, toggleTaskVariables } from 'generated/toggleTask'
-import { toggleAllTasks } from 'generated/toggleAllTasks'
+import {
+  Query,
+  Mutation,
+  MutationRemoveTaskArgs,
+  MutationEditTaskArgs,
+  MutationToggleTaskArgs,
+} from 'generated/graphql'
 
 export const FETCH_TASKS = gql`
   query Tasks {
@@ -53,69 +55,64 @@ const TOGGLE_ALL_TASKS = gql`
 `
 
 const Tasklist: React.FC<RouteComponentProps> = ({ location }) => {
-  const { data } = useQuery<Tasks>(FETCH_TASKS)
-  const [removeTaskMutation] = useMutation<removeTask, removeTaskVariables>(
-    REMOVE_TASK
+  const { data } = useQuery<Query>(FETCH_TASKS)
+  const [removeTaskMutation] = useMutation<
+    Mutation['removeTask'],
+    MutationRemoveTaskArgs
+  >(REMOVE_TASK)
+  const [editTaskMutation] = useMutation<
+    Mutation['editTask'],
+    MutationEditTaskArgs
+  >(EDIT_TASK)
+  const [toggleTaskMutation] = useMutation<
+    Mutation['toggleTask'],
+    MutationToggleTaskArgs
+  >(TOGGLE_TASK)
+  const [toggleAllTasksMutation] = useMutation<Mutation['toggleAllTasks']>(
+    TOGGLE_ALL_TASKS
   )
-  const [editTaskMutation] = useMutation<editTask, editTaskVariables>(EDIT_TASK)
-  const [toggleTaskMutation] = useMutation<toggleTask, toggleTaskVariables>(
-    TOGGLE_TASK
-  )
-  const [toggleAllTasksMutation] = useMutation<toggleAllTasks>(TOGGLE_ALL_TASKS)
 
   const inputRef = useRef<HTMLInputElement>(null)
   const [isEditing, setIsEditing] = useState(false)
   const [editText, setEditText] = useState('')
   const [editId, setEditId] = useState<string | null>(null)
 
-  const handleEdit = useCallback(
-    ({ text, id }: { text: string; id: string }) => {
-      setIsEditing(true)
+  const handleEdit = ({ text, id }: { text: string; id: string }) => {
+    setIsEditing(true)
+    setEditText(text)
+    setEditId(id)
+  }
+
+  const handleSubmit = (id: string) => {
+    if (editText.trim()) {
+      editTaskMutation({
+        variables: {
+          id,
+          text: editText,
+        },
+      })
+      setEditText('')
+      setIsEditing(false)
+      setEditId(null)
+    }
+  }
+
+  const handleChange = (e: any) => {
+    const text = e.target.value
+    if (isEditing) {
       setEditText(text)
-      setEditId(id)
-    },
-    []
-  )
+    }
+  }
 
-  const handleSubmit = useCallback(
-    id => {
-      if (editText.trim()) {
-        editTaskMutation({
-          variables: {
-            id,
-            text: editText,
-          },
-        })
-        setEditText('')
-        setIsEditing(false)
-        setEditId(null)
-      }
-    },
-    [editText, editTaskMutation]
-  )
-
-  const handleChange = useCallback(
-    e => {
-      const text = e.target.value
-      if (isEditing) {
-        setEditText(text)
-      }
-    },
-    [isEditing]
-  )
-
-  const handleKeyUp = useCallback(
-    ({ which, id }) => {
-      if (which === ESCAPE_KEY) {
-        setIsEditing(false)
-        setEditText('')
-        setEditId(null)
-      } else if (which === ENTER_KEY) {
-        handleSubmit(id)
-      }
-    },
-    [handleSubmit]
-  )
+  const handleKeyUp = ({ which, id }: { which: number; id: string }) => {
+    if (which === ESCAPE_KEY) {
+      setIsEditing(false)
+      setEditText('')
+      setEditId(null)
+    } else if (which === ENTER_KEY) {
+      handleSubmit(id)
+    }
+  }
 
   useEffect(() => {
     if (inputRef.current) {

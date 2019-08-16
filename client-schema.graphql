@@ -18,4 +18,6 @@ type Mutation {
   toggleTask(id: ID!): Task
 
   toggleAllTasks: [Task]
+
+  clearCompleted: [Task]
 }
