@@ -64,20 +64,21 @@ export const resolvers: Resolvers = {
         query: FETCH_TASKS,
       })
 
-      if (data) {
-        const index = data.tasks.findIndex(task => task.id === id)
-        if (index === -1) return null
+      if (!data) {
+        return null
+      }
+      const index = data.tasks.findIndex(task => task.id === id)
+      if (index === -1) return null
 
-        let newTasks = [...data.tasks]
-        newTasks[index].text = text
+      let newTasks = [...data.tasks]
+      newTasks[index].text = text
 
-        cache.writeData({
-          data: {
-            tasks: newTasks,
-          },
-        })
-        return newTasks[index]
-      } else return null
+      cache.writeData({
+        data: {
+          tasks: newTasks,
+        },
+      })
+      return newTasks[index]
     },
     removeTask: (
       _,
@@ -88,20 +89,21 @@ export const resolvers: Resolvers = {
         query: FETCH_TASKS,
       })
 
-      if (data) {
-        const index = data.tasks.findIndex(task => task.id === id)
-        if (index === -1) return null
+      if (!data) {
+        return null
+      }
+      const index = data.tasks.findIndex(task => task.id === id)
+      if (index === -1) return null
 
-        let [removedTask] = data.tasks.splice(index, 1)
-        let newTasks = [...data.tasks]
-        cache.writeData({
-          data: {
-            tasks: newTasks,
-          },
-        })
+      let [removedTask] = data.tasks.splice(index, 1)
+      let newTasks = [...data.tasks]
+      cache.writeData({
+        data: {
+          tasks: newTasks,
+        },
+      })
 
-        return removedTask
-      } else return null
+      return removedTask
     },
     toggleTask: (
       _,
@@ -112,55 +114,58 @@ export const resolvers: Resolvers = {
         query: FETCH_TASKS,
       })
 
-      if (data) {
-        const index = data.tasks.findIndex(task => task.id === id)
-        if (index === -1) return null
+      if (!data) {
+        return null
+      }
+      const index = data.tasks.findIndex(task => task.id === id)
+      if (index === -1) return null
 
-        let newTasks = [...data.tasks]
-        newTasks[index].completed = !newTasks[index].completed
-        cache.writeData({
-          data: {
-            tasks: newTasks,
-          },
-        })
+      let newTasks = [...data.tasks]
+      newTasks[index].completed = !newTasks[index].completed
+      cache.writeData({
+        data: {
+          tasks: newTasks,
+        },
+      })
 
-        return newTasks[index]
-      } else return null
+      return newTasks[index]
     },
     toggleAllTasks: (_, __, { cache }: { cache: InMemoryCache }) => {
       const data = cache.readQuery<Tasks>({
         query: FETCH_TASKS,
       })
 
-      if (data) {
-        let incompleteTasks = data.tasks.some(task => !task.completed)
-        let newTasks = data.tasks.map(task => ({
-          ...task,
-          completed: incompleteTasks,
-        }))
+      if (!data) {
+        return null
+      }
+      let incompleteTasks = data.tasks.some(task => !task.completed)
+      let newTasks = data.tasks.map(task => ({
+        ...task,
+        completed: incompleteTasks,
+      }))
 
-        cache.writeData({
-          data: {
-            tasks: newTasks,
-          },
-        })
-        return newTasks
-      } else return null
+      cache.writeData({
+        data: {
+          tasks: newTasks,
+        },
+      })
+      return newTasks
     },
     clearCompleted: (_, __, { cache: InMemoryCache }) => {
       const data = cache.readQuery<Tasks>({
         query: FETCH_TASKS,
       })
 
-      if (data) {
-        let newTasks = data.tasks.filter(task => !task.completed)
-        cache.writeData({
-          data: {
-            tasks: newTasks,
-          },
-        })
-        return newTasks
-      } else return null
+      if (!data) {
+        return null
+      }
+      let newTasks = data.tasks.filter(task => !task.completed)
+      cache.writeData({
+        data: {
+          tasks: newTasks,
+        },
+      })
+      return newTasks
     },
   },
 }

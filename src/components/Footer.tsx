@@ -24,7 +24,11 @@ const Footer: React.FC<RouteComponentProps> = ({ location }) => {
     [data]
   )
 
-  return data && data.tasks.length ? (
+  if (!data) {
+    return null
+  }
+
+  return (
     <footer className="footer">
       {remainingItems && (
         <span className="todo-count">
@@ -64,7 +68,7 @@ const Footer: React.FC<RouteComponentProps> = ({ location }) => {
         Clear completed
       </button>
     </footer>
-  ) : null
+  )
 }
 
 export default withRouter(Footer)

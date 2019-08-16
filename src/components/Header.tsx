@@ -13,7 +13,7 @@ const ADD_TASK = gql`
 `
 
 const Header: React.FC = () => {
-  let [text, setText] = useState<string>('')
+  let [text, setText] = useState('')
   let [addTaskMutation] = useMutation<Mutation['addTask'], MutationAddTaskArgs>(
     ADD_TASK
   )
