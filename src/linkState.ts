@@ -1,9 +1,16 @@
+import ApolloClient from 'apollo-boost'
 import { InMemoryCache, Resolvers, gql } from 'apollo-boost'
 import { uuidv4 } from 'config/utils'
 import { FETCH_TASKS } from 'components/Tasklist'
 import { Query as Tasks, Task } from 'generated/graphql'
 
 export const cache = new InMemoryCache()
+
+type Context = {
+  client: ApolloClient<unknown>
+  cache: InMemoryCache
+  getCacheKey: any
+}
 
 export const initializeData = () => {
   cache.writeData({
@@ -30,11 +37,7 @@ initializeData()
 
 export const resolvers: Resolvers = {
   Mutation: {
-    addTask: (
-      _,
-      { text }: { text: string },
-      { cache }: { cache: InMemoryCache }
-    ) => {
+    addTask: (_, { text }: { text: string }, { cache }: Context) => {
       const data = cache.readQuery<Tasks>({
         query: FETCH_TASKS,
       })
@@ -58,11 +61,11 @@ export const resolvers: Resolvers = {
     editTask: (
       _,
       { id, text }: { id: string; text: string },
-      { cache }: { cache: InMemoryCache }
+      { cache, getCacheKey }: Context
     ) => {
-      const taskId = `Task:${id}`
+      const taskId = getCacheKey({ __typename: 'Task', id })
       const fragment = gql`
-        fragment completedTask on Task {
+        fragment taskToEdit on Task {
           text
         }
       `
@@ -76,11 +79,7 @@ export const resolvers: Resolvers = {
       }
       return null
     },
-    removeTask: (
-      _,
-      { id }: { id: string },
-      { cache }: { cache: InMemoryCache }
-    ) => {
+    removeTask: (_, { id }: { id: string }, { cache }: Context) => {
       const data = cache.readQuery<Tasks>({
         query: FETCH_TASKS,
       })
@@ -104,9 +103,9 @@ export const resolvers: Resolvers = {
     toggleCompleted: (
       _,
       { id }: { id: string },
-      { cache }: { cache: InMemoryCache }
+      { cache, getCacheKey }: Context
     ) => {
-      const taskId = `Task:${id}`
+      const taskId = getCacheKey({ __typename: 'Task', id })
       const fragment = gql`
         fragment completedTask on Task {
           completed
@@ -122,7 +121,7 @@ export const resolvers: Resolvers = {
       }
       return null
     },
-    toggleAllTasks: (_, __, { cache }: { cache: InMemoryCache }) => {
+    toggleAllTasks: (_, __, { cache }: Context) => {
       const data = cache.readQuery<Tasks>({
         query: FETCH_TASKS,
       })
@@ -143,7 +142,7 @@ export const resolvers: Resolvers = {
       })
       return newTasks
     },
-    clearCompleted: (_, __, { cache }: { cache: InMemoryCache }) => {
+    clearCompleted: (_, __, { cache }: Context) => {
       const data = cache.readQuery<Tasks>({
         query: FETCH_TASKS,
       })
