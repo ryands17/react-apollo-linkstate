@@ -143,7 +143,7 @@ export const resolvers: Resolvers = {
       })
       return newTasks
     },
-    clearCompleted: (_, __, { cache: InMemoryCache }) => {
+    clearCompleted: (_, __, { cache }: { cache: InMemoryCache }) => {
       const data = cache.readQuery<Tasks>({
         query: FETCH_TASKS,
       })
