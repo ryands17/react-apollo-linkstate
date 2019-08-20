@@ -30,7 +30,7 @@ const Footer: React.FC<RouteComponentProps> = ({ location }) => {
 
   return (
     <footer className="footer">
-      {remainingItems && (
+      {remainingItems !== undefined && (
         <span className="todo-count">
           <strong>{remainingItems}</strong>{' '}
           {remainingItems === 1 ? `item` : `items`} left

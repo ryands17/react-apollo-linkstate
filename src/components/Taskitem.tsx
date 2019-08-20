@@ -8,7 +8,7 @@ import {
   Mutation,
   MutationRemoveTaskArgs,
   MutationEditTaskArgs,
-  MutationToggleTaskArgs,
+  MutationToggleCompletedArgs,
 } from 'generated/graphql'
 
 type TaskitemType = {
@@ -31,9 +31,9 @@ const EDIT_TASK = gql`
   }
 `
 
-const TOGGLE_TASK = gql`
-  mutation toggleTask($id: ID!) {
-    toggleTask(id: $id) @client {
+const TOGGLE_COMPLETED = gql`
+  mutation toggleCompleted($id: ID!) {
+    toggleCompleted(id: $id) @client {
       id
     }
   }
@@ -48,10 +48,10 @@ const Taskitem: React.FC<TaskitemType> = ({ task }) => {
     Mutation['editTask'],
     MutationEditTaskArgs
   >(EDIT_TASK)
-  const [toggleTaskMutation] = useMutation<
-    Mutation['toggleTask'],
-    MutationToggleTaskArgs
-  >(TOGGLE_TASK)
+  const [toggleCompletedMutation] = useMutation<
+    Mutation['toggleCompleted'],
+    MutationToggleCompletedArgs
+  >(TOGGLE_COMPLETED)
 
   const inputRef = useRef<HTMLInputElement>(null)
   const [isEditing, setIsEditing] = useState(false)
@@ -112,7 +112,7 @@ const Taskitem: React.FC<TaskitemType> = ({ task }) => {
         <input
           className="toggle"
           onChange={() =>
-            toggleTaskMutation({
+            toggleCompletedMutation({
               variables: {
                 id: task.id,
               },

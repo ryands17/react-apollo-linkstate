@@ -15,7 +15,7 @@ type Mutation {
 
   removeTask(id: ID!): Task
 
-  toggleTask(id: ID!): Task
+  toggleCompleted(id: ID!): Task
 
   toggleAllTasks: [Task]
 

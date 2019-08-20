@@ -1,4 +1,4 @@
-import { InMemoryCache, Resolvers } from 'apollo-boost'
+import { InMemoryCache, Resolvers, gql } from 'apollo-boost'
 import { uuidv4 } from 'config/utils'
 import { FETCH_TASKS } from 'components/Tasklist'
 import { Query as Tasks, Task } from 'generated/graphql'
@@ -60,25 +60,21 @@ export const resolvers: Resolvers = {
       { id, text }: { id: string; text: string },
       { cache }: { cache: InMemoryCache }
     ) => {
-      const data = cache.readQuery<Tasks>({
-        query: FETCH_TASKS,
-      })
-
-      if (!data) {
-        return null
+      const taskId = `Task:${id}`
+      const fragment = gql`
+        fragment completedTask on Task {
+          text
+        }
+      `
+      const task = cache.readFragment<Task>({ fragment, id: taskId })
+      if (task) {
+        const data = { ...task, text }
+        cache.writeData({
+          id: taskId,
+          data,
+        })
       }
-      const index = data.tasks.findIndex(task => task.id === id)
-      if (index === -1) return null
-
-      let newTasks = [...data.tasks]
-      newTasks[index].text = text
-
-      cache.writeData({
-        data: {
-          tasks: newTasks,
-        },
-      })
-      return newTasks[index]
+      return null
     },
     removeTask: (
       _,
@@ -105,30 +101,26 @@ export const resolvers: Resolvers = {
 
       return removedTask
     },
-    toggleTask: (
+    toggleCompleted: (
       _,
       { id }: { id: string },
       { cache }: { cache: InMemoryCache }
     ) => {
-      const data = cache.readQuery<Tasks>({
-        query: FETCH_TASKS,
-      })
-
-      if (!data) {
-        return null
+      const taskId = `Task:${id}`
+      const fragment = gql`
+        fragment completedTask on Task {
+          completed
+        }
+      `
+      const task = cache.readFragment<Task>({ fragment, id: taskId })
+      if (task) {
+        const data = { ...task, completed: !task.completed }
+        cache.writeData({
+          id: taskId,
+          data,
+        })
       }
-      const index = data.tasks.findIndex(task => task.id === id)
-      if (index === -1) return null
-
-      let newTasks = [...data.tasks]
-      newTasks[index].completed = !newTasks[index].completed
-      cache.writeData({
-        data: {
-          tasks: newTasks,
-        },
-      })
-
-      return newTasks[index]
+      return null
     },
     toggleAllTasks: (_, __, { cache }: { cache: InMemoryCache }) => {
       const data = cache.readQuery<Tasks>({
