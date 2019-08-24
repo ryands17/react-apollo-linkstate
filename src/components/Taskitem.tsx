@@ -78,8 +78,8 @@ const Taskitem: React.FC<TaskitemType> = ({ task }) => {
     }
   }
 
-  const handleChange = (e: any) => {
-    const text = e.target.value
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const text = evt.target.value
     if (isEditing) {
       setEditText(text)
     }
