@@ -129,10 +129,9 @@ export const resolvers: Resolvers = {
       if (!data) {
         return null
       }
-      let incompleteTasks = data.tasks.some(task => !task.completed)
       let newTasks = data.tasks.map(task => ({
         ...task,
-        completed: incompleteTasks,
+        completed: !task.completed,
       }))
 
       cache.writeData({
