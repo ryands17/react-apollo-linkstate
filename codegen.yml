@@ -1,5 +1,7 @@
 overwrite: true
-schema: 'client-schema.graphql'
+schema:
+  # - 'https://countries.trevorblades.com/graphql'
+  - './src/client-schema.graphql'
 generates:
   src/generated/graphql.ts:
     plugins:

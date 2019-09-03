@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
+import { loader } from 'graphql.macro'
 
 import 'todomvc-app-css/index.css'
 import 'index.css'
@@ -11,6 +12,7 @@ import { initializeData, cache, resolvers } from 'linkState'
 
 const client = new ApolloClient({
   cache,
+  typeDefs: loader('./client-schema.graphql'),
   resolvers,
 })
 
