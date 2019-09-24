@@ -1,16 +1,18 @@
 import ApolloClient from 'apollo-boost'
 import { InMemoryCache, Resolvers, gql } from 'apollo-boost'
 import { uuidv4 } from 'config/utils'
-import { FETCH_TASKS } from 'components/Tasklist'
 import { Query as Tasks, Task } from 'generated/graphql'
+import { loader } from 'graphql.macro'
 
 export const cache = new InMemoryCache()
 
 type Context = {
   client: ApolloClient<unknown>
   cache: InMemoryCache
-  getCacheKey: any
+  getCacheKey: ({ __typename, id }: { __typename: string; id: string }) => any
 }
+
+const FETCH_TASKS = loader('./graphql/fetchTasks.graphql')
 
 export const initializeData = () => {
   cache.writeData({

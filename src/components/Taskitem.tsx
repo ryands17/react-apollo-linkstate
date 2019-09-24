@@ -1,57 +1,21 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useMutation } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import cx from 'classnames'
 import { ESCAPE_KEY, ENTER_KEY } from 'config/utils'
 import {
   Task,
-  Mutation,
-  MutationRemoveTaskArgs,
-  MutationEditTaskArgs,
-  MutationToggleCompletedArgs,
+  useRemoveTaskMutation,
+  useEditTaskMutation,
+  useToggleCompletedMutation,
 } from 'generated/graphql'
 
 type TaskitemType = {
   task: Task
 }
 
-const REMOVE_TASK = gql`
-  mutation removeTask($id: ID!) {
-    removeTask(id: $id) @client {
-      id
-    }
-  }
-`
-
-const EDIT_TASK = gql`
-  mutation editTask($id: ID!, $text: String!) {
-    editTask(id: $id, text: $text) @client {
-      id
-    }
-  }
-`
-
-const TOGGLE_COMPLETED = gql`
-  mutation toggleCompleted($id: ID!) {
-    toggleCompleted(id: $id) @client {
-      id
-    }
-  }
-`
-
 const Taskitem: React.FC<TaskitemType> = ({ task }) => {
-  const [removeTaskMutation] = useMutation<
-    Mutation['removeTask'],
-    MutationRemoveTaskArgs
-  >(REMOVE_TASK)
-  const [editTaskMutation] = useMutation<
-    Mutation['editTask'],
-    MutationEditTaskArgs
-  >(EDIT_TASK)
-  const [toggleCompletedMutation] = useMutation<
-    Mutation['toggleCompleted'],
-    MutationToggleCompletedArgs
-  >(TOGGLE_COMPLETED)
+  const [removeTaskMutation] = useRemoveTaskMutation()
+  const [editTaskMutation] = useEditTaskMutation()
+  const [toggleCompletedMutation] = useToggleCompletedMutation()
 
   const inputRef = useRef<HTMLInputElement>(null)
   const [isEditing, setIsEditing] = useState(false)
@@ -80,9 +44,7 @@ const Taskitem: React.FC<TaskitemType> = ({ task }) => {
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const text = evt.target.value
-    if (isEditing) {
-      setEditText(text)
-    }
+    if (isEditing) setEditText(text)
   }
 
   const handleKeyUp = ({ which, id }: { which: number; id: string }) => {
@@ -96,9 +58,7 @@ const Taskitem: React.FC<TaskitemType> = ({ task }) => {
   }
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus()
-    }
+    if (inputRef.current) inputRef.current.focus()
   }, [isEditing])
 
   return (

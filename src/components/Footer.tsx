@@ -1,25 +1,15 @@
 import React, { useMemo } from 'react'
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
-import gql from 'graphql-tag'
-import { useQuery, useMutation } from '@apollo/react-hooks'
-import { FETCH_TASKS } from './Tasklist'
-import { Query, Mutation } from 'generated/graphql'
-
-const CLEAR_COMPLETED_TASKS = gql`
-  mutation clearCompletedTasks {
-    clearCompleted @client {
-      id
-    }
-  }
-`
+import {
+  useClearCompletedTasksMutation,
+  useTasksQuery,
+} from 'generated/graphql'
 
 const Footer: React.FC<RouteComponentProps> = ({ location }) => {
-  const { data } = useQuery<Query>(FETCH_TASKS)
-  const [clearCompletedTasks] = useMutation<Mutation['clearCompleted']>(
-    CLEAR_COMPLETED_TASKS
-  )
+  const { data } = useTasksQuery()
+  const [clearCompletedTasks] = useClearCompletedTasksMutation()
 
-  let remainingItems = useMemo(
+  const remainingItems = useMemo(
     () => data && data.tasks.filter(task => !task.completed).length,
     [data]
   )
