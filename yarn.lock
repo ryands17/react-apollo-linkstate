@@ -1118,16 +1118,6 @@
     "@graphql-toolkit/schema-merging" "0.6.6"
     tslib "1.10.0"
 
-"@graphql-codegen/plugin-helpers@1.8.2":
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-1.8.2.tgz#b982d9af9a68a3571118a1ad27ff512e49216a0c"
-  integrity sha512-VMeUv/oMSVON/+8h1kor4VzamVxEWsktEybCiF92Ik3Ho5XxXGo5bweBauNFbxX6tff5gVdlPUDGMur86taKPg==
-  dependencies:
-    change-case "3.1.0"
-    common-tags "1.8.0"
-    import-from "3.0.0"
-    tslib "1.10.0"
-
 "@graphql-codegen/plugin-helpers@1.8.3":
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-1.8.3.tgz#3235fe1752d622943a4ba3325c5a8d23e79bc399"
@@ -1166,18 +1156,6 @@
     "@graphql-codegen/plugin-helpers" "1.8.3"
     "@graphql-codegen/visitor-plugin-common" "1.8.3"
     auto-bind "3.0.0"
-    tslib "1.10.0"
-
-"@graphql-codegen/visitor-plugin-common@1.8.2":
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-1.8.2.tgz#25915d791ab7ecf126b87551b735ee00813b6622"
-  integrity sha512-Ma2TBYvu2i+D4Wgo5spODMDOcD6w4xI7wEhxUs+WGyjOVPs4TEUfstMQkDFJbcwlQbZKlDaswJfgY8zQ5JgMMw==
-  dependencies:
-    "@graphql-codegen/plugin-helpers" "1.8.2"
-    auto-bind "3.0.0"
-    dependency-graph "0.8.0"
-    graphql-tag "2.10.1"
-    relay-compiler "6.0.0"
     tslib "1.10.0"
 
 "@graphql-codegen/visitor-plugin-common@1.8.3":
@@ -1817,10 +1795,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@12.12.5", "@types/node@>=6":
-  version "12.12.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.5.tgz#66103d2eddc543d44a04394abb7be52506d7f290"
-  integrity sha512-KEjODidV4XYUlJBF3XdjSH5FWoMCtO0utnhtdLf1AgeuZLOrRbvmU/gaRCVg7ZaQDjVf3l84egiY0mRNe5xE4A==
+"@types/node@*", "@types/node@12.12.7", "@types/node@>=6":
+  version "12.12.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.7.tgz#01e4ea724d9e3bd50d90c11fd5980ba317d8fa11"
+  integrity sha512-E6Zn0rffhgd130zbCbAr/JdXfXkoOUFAKNs/rF8qnafSJ8KYaA/j3oz7dcwal+lYjLA7xvdd5J4wdYpCTlP8+w==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
