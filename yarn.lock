@@ -1118,16 +1118,6 @@
     "@graphql-toolkit/schema-merging" "0.6.6"
     tslib "1.10.0"
 
-"@graphql-codegen/plugin-helpers@1.8.2":
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-1.8.2.tgz#b982d9af9a68a3571118a1ad27ff512e49216a0c"
-  integrity sha512-VMeUv/oMSVON/+8h1kor4VzamVxEWsktEybCiF92Ik3Ho5XxXGo5bweBauNFbxX6tff5gVdlPUDGMur86taKPg==
-  dependencies:
-    change-case "3.1.0"
-    common-tags "1.8.0"
-    import-from "3.0.0"
-    tslib "1.10.0"
-
 "@graphql-codegen/plugin-helpers@1.8.3":
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-1.8.3.tgz#3235fe1752d622943a4ba3325c5a8d23e79bc399"
@@ -1166,18 +1156,6 @@
     "@graphql-codegen/plugin-helpers" "1.8.3"
     "@graphql-codegen/visitor-plugin-common" "1.8.3"
     auto-bind "3.0.0"
-    tslib "1.10.0"
-
-"@graphql-codegen/visitor-plugin-common@1.8.2":
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-1.8.2.tgz#25915d791ab7ecf126b87551b735ee00813b6622"
-  integrity sha512-Ma2TBYvu2i+D4Wgo5spODMDOcD6w4xI7wEhxUs+WGyjOVPs4TEUfstMQkDFJbcwlQbZKlDaswJfgY8zQ5JgMMw==
-  dependencies:
-    "@graphql-codegen/plugin-helpers" "1.8.2"
-    auto-bind "3.0.0"
-    dependency-graph "0.8.0"
-    graphql-tag "2.10.1"
-    relay-compiler "6.0.0"
     tslib "1.10.0"
 
 "@graphql-codegen/visitor-plugin-common@1.8.3":
@@ -11710,10 +11688,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.6.4:
-  version "3.6.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.4.tgz#b18752bb3792bc1a0281335f7f6ebf1bbfc5b91d"
-  integrity sha512-unoCll1+l+YK4i4F8f22TaNVPRHcD9PA3yCuZ8g5e0qGqlVlJ/8FSateOLLSagn+Yg5+ZwuPkL8LFUc0Jcvksg==
+typescript@3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.2.tgz#27e489b95fa5909445e9fef5ee48d81697ad18fb"
+  integrity sha512-ml7V7JfiN2Xwvcer+XAf2csGO1bPBdRbFCkYBczNZggrBZ9c7G3riSUeJmqEU5uOtXNPMhE3n+R4FA/3YOAWOQ==
 
 typesync@^0.6.1:
   version "0.6.1"
