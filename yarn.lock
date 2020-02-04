@@ -1929,13 +1929,15 @@
     tslib "1.10.0"
 
 "@graphql-codegen/typescript-react-apollo@^1.7.0":
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-react-apollo/-/typescript-react-apollo-1.11.2.tgz#2f06eb677bc745270127756278bd979902015898"
-  integrity sha512-aqRsHWuIRL4vnMl5T+Y1pkeVe6zFBbgSb0xFn3fTjJafnZAQEtEzbXLlS7flqB2mW8BxaadkglDP4e0okq9h3g==
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-react-apollo/-/typescript-react-apollo-1.12.1.tgz#96f4f3c5be3c348fe58917f7d4a5cdc2302c7c3b"
+  integrity sha512-uy6R2M6EvLXu9BWA9untZBpE+64OUnC2zjV0TO2cK6tz1Ktut9pyC7F4BNGoFHfTvmx80dxtKfwbqdmP48mddQ==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "1.11.2"
-    "@graphql-codegen/visitor-plugin-common" "1.11.2"
+    "@graphql-codegen/plugin-helpers" "1.12.1"
+    "@graphql-codegen/visitor-plugin-common" "1.12.1"
+    auto-bind "4.0.0"
     camel-case "4.1.1"
+    pascal-case "3.1.1"
     tslib "1.10.0"
 
 "@graphql-codegen/typescript@1.11.2":
@@ -1958,6 +1960,19 @@
     dependency-graph "0.8.1"
     graphql-tag "2.10.1"
     relay-compiler "8.0.0"
+    tslib "1.10.0"
+
+"@graphql-codegen/visitor-plugin-common@1.12.1":
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-1.12.1.tgz#fb7f3b0e204cb613b7e5cae36171a9c7fedd5b05"
+  integrity sha512-dfcb0d1u0bGo7KgaGoWMUrFec9rKB5JiiFatHfs2CK6h6iT6giqkuyHy8247tH3yvjk+xFoIG2NVIqg9jUyv+w==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "1.12.1"
+    "@graphql-toolkit/relay-operation-optimizer" "0.9.7"
+    auto-bind "4.0.0"
+    dependency-graph "0.8.1"
+    graphql-tag "2.10.1"
+    pascal-case "3.1.1"
     tslib "1.10.0"
 
 "@graphql-toolkit/apollo-engine-loader@0.9.7":
@@ -2118,6 +2133,14 @@
     "@graphql-toolkit/url-loader" "0.9.7"
     prisma-yml "1.34.10"
     tslib "1.10.0"
+
+"@graphql-toolkit/relay-operation-optimizer@0.9.7":
+  version "0.9.7"
+  resolved "https://registry.yarnpkg.com/@graphql-toolkit/relay-operation-optimizer/-/relay-operation-optimizer-0.9.7.tgz#e13034f835231b268ee355bfac6228dd34f9b951"
+  integrity sha512-IPFAbKMOX3RdjyDuamK9ziuTFD5tsCiTVvHACHA2wgg+32krJZJsV6STKhFLqIwytS40vt5zhZydQCFxIrCD5g==
+  dependencies:
+    "@graphql-toolkit/common" "0.9.7"
+    relay-compiler "8.0.0"
 
 "@graphql-toolkit/schema-merging@0.9.1":
   version "0.9.1"
