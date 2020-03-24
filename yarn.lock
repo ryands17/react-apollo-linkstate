@@ -2075,16 +2075,6 @@
     pascal-case "3.1.1"
     tslib "1.11.1"
 
-"@graphql-codegen/typescript@1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-1.13.0.tgz#3330299b9d2d5bedf1580cc21bb52a7212ebd66f"
-  integrity sha512-giUF2nUqyTssBInRpW5aK1hkZ2DDpNqMymFP59fuNPSY+lmufXI5pBkeDa+JrEB6K5CyDtWU8NpNh6KxNrPSaA==
-  dependencies:
-    "@graphql-codegen/plugin-helpers" "1.13.0"
-    "@graphql-codegen/visitor-plugin-common" "1.13.0"
-    auto-bind "4.0.0"
-    tslib "1.11.1"
-
 "@graphql-codegen/typescript@1.13.1":
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-1.13.1.tgz#36c6751b6d50ffcda6ee9b5cf79dee7681039c52"
