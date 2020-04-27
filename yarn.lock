@@ -2028,20 +2028,6 @@
     auto-bind "~4.0.0"
     tslib "~1.11.1"
 
-"@graphql-codegen/visitor-plugin-common@1.13.2":
-  version "1.13.2"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-1.13.2.tgz#978f7bf4fcedeb0f7e82652b98a2bd98cfffaca1"
-  integrity sha512-W2VsdV7/irhlNa0VseqaIOmP/1JXFnxd4isjbk12nfkLdKOEOvG7jUQ89peE4pQczIPxgJJwjWtRA+y0oyeD8w==
-  dependencies:
-    "@graphql-codegen/plugin-helpers" "1.13.2"
-    "@graphql-toolkit/relay-operation-optimizer" "~0.10.3"
-    array.prototype.flatmap "1.2.3"
-    auto-bind "~4.0.0"
-    dependency-graph "0.9.0"
-    graphql-tag "2.10.3"
-    pascal-case "3.1.1"
-    tslib "~1.11.1"
-
 "@graphql-codegen/visitor-plugin-common@1.13.3":
   version "1.13.3"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-1.13.3.tgz#0bcba2ad47a2f2e9e6b1c41260e4461e3ad8b889"
@@ -2168,14 +2154,6 @@
     "@graphql-toolkit/url-loader" "0.10.3"
     prisma-yml "1.34.10"
     tslib "1.11.1"
-
-"@graphql-toolkit/relay-operation-optimizer@~0.10.3":
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/@graphql-toolkit/relay-operation-optimizer/-/relay-operation-optimizer-0.10.3.tgz#b932db74bf7185dd6d4e3cad8f42472cb627071a"
-  integrity sha512-3NeU6SlOkXj6pzMVhn2i21/M79GSXCrqIdGwZi71mqBBzpB+7SfUTdiV0RNKJvmdcQ0U3lKHt8RQcCT/e2eDTg==
-  dependencies:
-    "@graphql-toolkit/common" "0.10.3"
-    relay-compiler "9.0.0"
 
 "@graphql-toolkit/relay-operation-optimizer@~0.10.4":
   version "0.10.4"
@@ -2719,10 +2697,10 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
-"@types/react-dom@16.9.6":
-  version "16.9.6"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.6.tgz#9e7f83d90566521cc2083be2277c6712dcaf754c"
-  integrity sha512-S6ihtlPMDotrlCJE9ST1fRmYrQNNwfgL61UB4I1W7M6kPulUKx9fXAleW5zpdIjUQ4fTaaog8uERezjsGUj9HQ==
+"@types/react-dom@16.9.7":
+  version "16.9.7"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.7.tgz#60844d48ce252d7b2dccf0c7bb937130e27c0cd2"
+  integrity sha512-GHTYhM8/OwUCf254WO5xqR/aqD3gC9kSTLpopWGpQLpnw23jk44RvMHsyUSEplvRJZdHxhJGMMLF0kCPYHPhQA==
   dependencies:
     "@types/react" "*"
 
