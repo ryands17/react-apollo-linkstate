@@ -2045,12 +2045,12 @@
     tslib "~2.0.0"
 
 "@graphql-codegen/typescript-react-apollo@^1.7.0":
-  version "1.15.4"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-react-apollo/-/typescript-react-apollo-1.15.4.tgz#9877c9a45f69a1998c78b5fa008d8b532a44edf5"
-  integrity sha512-Fidu3eV/fjwSfr5lU87wvF2K64oWWbSzklf46x/Bu4mFKGuWpLq1mTL7IXzxrVcO9x0y0dUcBABlGUnuElHhFg==
+  version "1.16.3"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-react-apollo/-/typescript-react-apollo-1.16.3.tgz#0e56b86da47b011f549b2f2ad5aa2f2f0328668f"
+  integrity sha512-S/IxAbmidnwg9n0Je38lGaZgRzlB1bWxLXOOmBO1/GkKtmcyPd3ivlw2uWIltF7lcMb8cLDzFRHMCdcJLCfBGQ==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "1.15.4"
-    "@graphql-codegen/visitor-plugin-common" "1.15.4"
+    "@graphql-codegen/plugin-helpers" "1.16.3"
+    "@graphql-codegen/visitor-plugin-common" "1.16.3"
     auto-bind "~4.0.0"
     camel-case "4.1.1"
     pascal-case "3.1.1"
