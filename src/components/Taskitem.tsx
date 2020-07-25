@@ -1,22 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react'
 import cx from 'classnames'
 import { ESCAPE_KEY, ENTER_KEY } from 'config/utils'
-import {
-  Task,
-  useRemoveTaskMutation,
-  useEditTaskMutation,
-  useToggleCompletedMutation,
-} from 'generated/graphql'
+import { Task, taskOperations } from 'config/state'
 
-type TaskitemType = {
+type Props = {
   task: Task
 }
 
-const Taskitem: React.FC<TaskitemType> = ({ task }) => {
-  const [removeTaskMutation] = useRemoveTaskMutation()
-  const [editTaskMutation] = useEditTaskMutation()
-  const [toggleCompletedMutation] = useToggleCompletedMutation()
-
+const Taskitem: React.FC<Props> = ({ task }) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [isEditing, setIsEditing] = useState(false)
   const [editText, setEditText] = useState('')
@@ -30,11 +21,9 @@ const Taskitem: React.FC<TaskitemType> = ({ task }) => {
 
   const handleSubmit = (id: string) => {
     if (editText.trim()) {
-      editTaskMutation({
-        variables: {
-          id,
-          text: editText,
-        },
+      taskOperations.editTask({
+        id,
+        text: editText,
       })
       setEditText('')
       setIsEditing(false)
@@ -71,13 +60,9 @@ const Taskitem: React.FC<TaskitemType> = ({ task }) => {
       <div className="view">
         <input
           className="toggle"
-          onChange={() =>
-            toggleCompletedMutation({
-              variables: {
-                id: task.id,
-              },
-            })
-          }
+          onChange={() => {
+            taskOperations.toggleTask(task.id)
+          }}
           checked={task.completed}
           readOnly
           type="checkbox"
@@ -89,13 +74,9 @@ const Taskitem: React.FC<TaskitemType> = ({ task }) => {
         </label>
         <button
           className="destroy"
-          onClick={() =>
-            removeTaskMutation({
-              variables: {
-                id: task.id,
-              },
-            })
-          }
+          onClick={() => {
+            taskOperations.removeTask(task.id)
+          }}
         />
       </div>
       {editId && (

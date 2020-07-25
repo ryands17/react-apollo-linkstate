@@ -1,27 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ApolloClient from 'apollo-boost'
-import { ApolloProvider } from '@apollo/react-hooks'
-import { loader } from 'graphql.macro'
+import { ApolloClient, ApolloProvider } from '@apollo/client'
 
 import 'todomvc-app-css/index.css'
 import 'index.css'
 
 import App from 'App'
-import { initializeData, cache, resolvers } from 'linkState'
+import { cache } from 'config/state'
 
 const client = new ApolloClient({
   cache,
-  typeDefs: loader('./client-schema.graphql'),
-  resolvers,
-})
-
-client.onClearStore(async () => {
-  initializeData()
-})
-
-client.onResetStore(async () => {
-  initializeData()
 })
 
 ReactDOM.render(

@@ -1,16 +1,26 @@
 import React, { useMemo } from 'react'
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
-import {
-  useClearCompletedTasksMutation,
-  useTasksQuery,
-} from 'generated/graphql'
+import { gql, useQuery } from '@apollo/client'
+import { Tasks, taskOperations } from 'config/state'
+
+export const GET_ALL_TASKS = gql`
+  query getAllTasks {
+    tasks @client {
+      id
+      text
+      completed
+    }
+  }
+`
+type Data = {
+  tasks: Tasks
+}
 
 const Footer: React.FC<RouteComponentProps> = ({ location }) => {
-  const { data } = useTasksQuery()
-  const [clearCompletedTasks] = useClearCompletedTasksMutation()
+  const { data } = useQuery<Data>(GET_ALL_TASKS)
 
   const remainingItems = useMemo(
-    () => data && data.tasks.filter(task => !task.completed).length,
+    () => data?.tasks.filter(task => !task.completed).length,
     [data]
   )
 
@@ -54,7 +64,12 @@ const Footer: React.FC<RouteComponentProps> = ({ location }) => {
           </Link>
         </li>
       </ul>
-      <button className="clear-completed" onClick={() => clearCompletedTasks()}>
+      <button
+        className="clear-completed"
+        onClick={() => {
+          taskOperations.clearCompleted()
+        }}
+      >
         Clear completed
       </button>
     </footer>

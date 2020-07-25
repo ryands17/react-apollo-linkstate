@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { ENTER } from 'config/utils'
-import { useAddTaskMutation } from 'generated/graphql'
+import { taskOperations } from 'config/state'
 
 const Header: React.FC = () => {
   let [text, setText] = useState('')
-  let [addTaskMutation] = useAddTaskMutation()
 
   return (
     <header className="header">
@@ -14,11 +13,7 @@ const Header: React.FC = () => {
         onChange={({ target }) => setText(target.value)}
         onKeyPress={({ key }) => {
           if (key === ENTER && text.trim()) {
-            addTaskMutation({
-              variables: {
-                text,
-              },
-            })
+            taskOperations.addtask(text)
             setText('')
           }
         }}

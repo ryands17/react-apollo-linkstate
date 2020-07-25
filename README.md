@@ -1,14 +1,12 @@
-Apollo Link State + Hooks
+Apollo Local state management with Hooks
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm run generate:client:schema`
+### `npm run generate:schema`
 
 This will generate types for the client schema in order to get code completion.
-
-**_Important_:** Run this command after you clone this repo for the first time or take a pull on update so that you get the latest types.
 
 ### `npm start`
 
