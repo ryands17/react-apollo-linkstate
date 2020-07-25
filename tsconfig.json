@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "types": ["@graphql-typed-document-node/apollo-client-3"]
+    "types": ["@graphql-typed-document-node/apollo-client-3", "jest", "node"]
   },
   "include": ["src"],
   "exclude": ["src/generated"]
