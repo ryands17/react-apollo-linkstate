@@ -1,0 +1,11 @@
+query getAllTasks {
+  tasks @client {
+    id
+    text
+    completed
+  }
+}
+
+query remainingTasks {
+  remainingTasks @client
+}

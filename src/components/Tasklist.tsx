@@ -1,25 +1,12 @@
-import React from 'react'
+import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { Tasks, taskOperations } from 'config/state'
-import { gql, useQuery } from '@apollo/client'
+import { taskOperations } from 'config/state'
+import { useQuery } from '@apollo/client'
+import { GetAllTasksDocument } from 'generated/typed-document-nodes'
 import Taskitem from './Taskitem'
 
-export const GET_ALL_TASKS = gql`
-  query getAllTasks {
-    tasks @client {
-      id
-      text
-      completed
-    }
-  }
-`
-
-type Data = {
-  tasks: Tasks
-}
-
 const Tasklist: React.FC<RouteComponentProps> = ({ location }) => {
-  const { data } = useQuery<Data>(GET_ALL_TASKS)
+  const { data } = useQuery(GetAllTasksDocument)
 
   return (
     <section className="main">

@@ -1,14 +1,7 @@
 import { InMemoryCache, makeVar } from '@apollo/client'
 import { produce } from 'immer'
+import { Task } from 'generated/typed-document-nodes'
 import { uuidv4 } from './utils'
-
-export type Task = {
-  id: string
-  text: string
-  completed: boolean
-}
-
-export type Tasks = Task[]
 
 export const cache: InMemoryCache = new InMemoryCache({
   typePolicies: {
@@ -16,7 +9,12 @@ export const cache: InMemoryCache = new InMemoryCache({
       fields: {
         tasks: {
           read() {
-            return tasks()
+            return tasks() ?? []
+          },
+        },
+        remainingTasks: {
+          read() {
+            return tasks().filter(task => !task.completed).length ?? 0
           },
         },
       },
@@ -24,7 +22,7 @@ export const cache: InMemoryCache = new InMemoryCache({
   },
 })
 
-const initialTasks: Tasks = [
+const initialTasks: Task[] = [
   {
     id: uuidv4(),
     text: 'Learn React hooks',
@@ -37,7 +35,7 @@ const initialTasks: Tasks = [
   },
 ]
 
-const tasks = makeVar<Tasks>(initialTasks)
+const tasks = makeVar<Task[]>(initialTasks)
 
 export const taskOperations = {
   addtask(text: string) {

@@ -1,39 +1,18 @@
-import React, { useMemo } from 'react'
+import * as React from 'react'
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
-import { gql, useQuery } from '@apollo/client'
-import { Tasks, taskOperations } from 'config/state'
-
-export const GET_ALL_TASKS = gql`
-  query getAllTasks {
-    tasks @client {
-      id
-      text
-      completed
-    }
-  }
-`
-type Data = {
-  tasks: Tasks
-}
+import { useQuery } from '@apollo/client'
+import { taskOperations } from 'config/state'
+import { RemainingTasksDocument } from 'generated/typed-document-nodes'
 
 const Footer: React.FC<RouteComponentProps> = ({ location }) => {
-  const { data } = useQuery<Data>(GET_ALL_TASKS)
-
-  const remainingItems = useMemo(
-    () => data?.tasks.filter(task => !task.completed).length,
-    [data]
-  )
-
-  if (!data) {
-    return null
-  }
+  const { data } = useQuery(RemainingTasksDocument)
 
   return (
     <footer className="footer">
-      {remainingItems !== undefined && (
+      {data?.remainingTasks !== undefined && (
         <span className="todo-count">
-          <strong>{remainingItems}</strong>{' '}
-          {remainingItems === 1 ? `item` : `items`} left
+          <strong>{data?.remainingTasks}</strong>{' '}
+          {data?.remainingTasks === 1 ? `item` : `items`} left
         </span>
       )}
       <ul className="filters">

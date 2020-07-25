@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import * as React from 'react'
 import { ENTER } from 'config/utils'
 import { taskOperations } from 'config/state'
 
 const Header: React.FC = () => {
-  let [text, setText] = useState('')
+  let [text, setText] = React.useState('')
 
   return (
     <header className="header">

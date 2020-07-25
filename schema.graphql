@@ -1,0 +1,11 @@
+type Task {
+  id: String!
+  text: String!
+  completed: Boolean!
+}
+
+type Query {
+  tasks: [Task!]!
+
+  remainingTasks: Int!
+}

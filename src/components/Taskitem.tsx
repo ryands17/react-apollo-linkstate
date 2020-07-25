@@ -1,17 +1,18 @@
-import React, { useRef, useState, useEffect } from 'react'
+import * as React from 'react'
 import cx from 'classnames'
 import { ESCAPE_KEY, ENTER_KEY } from 'config/utils'
-import { Task, taskOperations } from 'config/state'
+import { Task } from 'generated/typed-document-nodes'
+import { taskOperations } from 'config/state'
 
 type Props = {
   task: Task
 }
 
 const Taskitem: React.FC<Props> = ({ task }) => {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const [isEditing, setIsEditing] = useState(false)
-  const [editText, setEditText] = useState('')
-  const [editId, setEditId] = useState<string | null>(null)
+  const inputRef = React.useRef<HTMLInputElement>(null)
+  const [isEditing, setIsEditing] = React.useState(false)
+  const [editText, setEditText] = React.useState('')
+  const [editId, setEditId] = React.useState<string | null>(null)
 
   const handleEdit = ({ text, id }: { text: string; id: string }) => {
     setIsEditing(true)
@@ -46,7 +47,7 @@ const Taskitem: React.FC<Props> = ({ task }) => {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (inputRef.current) inputRef.current.focus()
   }, [isEditing])
 
