@@ -32,6 +32,8 @@ jobs:
 
       - name: Build
         run: npm i -g serve & yarn build
+        env:
+          CI: false
 
       - name: Run E2E Tests
         uses: cypress-io/github-action@v1
