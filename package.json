@@ -22,10 +22,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "cy:open": "dotenv -- cypress open",
     "prebuild": "npm run generate:schema",
     "generate:schema": "graphql-codegen --config codegen.yml",
-    "generate:schema::watch": "graphql-codegen --config codegen.yml --watch"
+    "generate:schema::watch": "npm run generate:schema -- --watch"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -56,6 +56,8 @@
     "@types/classnames": "^2.2.9",
     "@types/graphql": "^14.2.3",
     "@types/react-router-dom": "^5.1.0",
+    "cypress": "^4.11.0",
+    "dotenv-cli": "^3.2.0",
     "husky": "^4.0.7",
     "lint-staged": "^10.0.1",
     "npm-run-all": "^4.1.5",
