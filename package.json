@@ -51,7 +51,7 @@
     "@graphql-codegen/cli": "1.17.4",
     "@graphql-codegen/typed-document-node": "^1.17.4",
     "@graphql-codegen/typescript": "1.17.4",
-    "@graphql-codegen/typescript-operations": "1.17.4",
+    "@graphql-codegen/typescript-operations": "1.17.6",
     "@graphql-typed-document-node/apollo-client-3": "^0.0.1",
     "@types/classnames": "^2.2.9",
     "@types/graphql": "^14.2.3",
