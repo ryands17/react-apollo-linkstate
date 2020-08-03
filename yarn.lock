@@ -1493,17 +1493,17 @@
     aggregate-error "3.0.1"
     tslib "~2.0.0"
 
-"@graphql-typed-document-node/apollo-client-3@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/apollo-client-3/-/apollo-client-3-0.0.1.tgz#ee80df7cec04c085b9edcea30bbdd6db52155a84"
-  integrity sha512-Rk8SM4xc/z2S611G27U7c/HmyHRISp64gbUYGwHGyvuHdZ4XYQHmvxbJTkJIZON36eO+OJ7VBi4d4gRbP8tStA==
+"@graphql-typed-document-node/apollo-client-3@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/apollo-client-3/-/apollo-client-3-1.0.0.tgz#2c6d8ac9e675bfc383921e24aa3e11443b3f4013"
+  integrity sha512-f9dqZ5kXGDRF0FQ/FIbmPzeLcsZ0+43E1P159sMHs0uZ25U9+HQzSaiCpRdQjH/z46T+3lb4ehlV3jn61ULfVA==
   dependencies:
-    "@graphql-typed-document-node/core" "0.0.1"
+    "@graphql-typed-document-node/core" "1.0.0"
 
-"@graphql-typed-document-node/core@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-0.0.1.tgz#f5cd1a0e75abe8a07a855c463a2ba947fe5913ec"
-  integrity sha512-NqQFW+ZN1wPZjrHGRzLlP2qEisXaDITp21FIuWmsMnP1ed76XI69LT4mv1QF+gWL3SWKgKS3gK8fsTeQUR3Swg==
+"@graphql-typed-document-node/core@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-1.0.0.tgz#10d431057a3a268aba2c670a83de1a60bb4db1aa"
+  integrity sha512-2YMEVS0Sla73AtRe7H/uo4W3xKj0cvtCYeLJe8ZMP44YKWEcowy9mr4r4H5d/SDO1hLqOccSgJaHmokciML3nw==
 
 "@hapi/address@2.x.x":
   version "2.1.4"
