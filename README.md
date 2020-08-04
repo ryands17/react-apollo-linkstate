@@ -1,5 +1,7 @@
 Apollo Local state management with Hooks
 
+![Build status](https://github.com/ryands17/react-apollo-linkstate/workflows/CI/badge.svg)
+
 ## Available Scripts
 
 In the project directory, you can run:
