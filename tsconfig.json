@@ -14,8 +14,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
-    "types": ["@graphql-typed-document-node/apollo-client-3", "jest", "node"]
+    "jsx": "react-jsx",
+    "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
   "exclude": ["src/generated"]
