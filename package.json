@@ -55,7 +55,7 @@
     "@graphql-codegen/typescript-operations": "1.17.13",
     "@graphql-typed-document-node/core": "3.1.0",
     "@types/classnames": "2.2.11",
-    "@types/react-router-dom": "5.1.6",
+    "@types/react-router-dom": "5.1.7",
     "cypress": "6.2.0",
     "dotenv-cli": "4.0.0",
     "husky": "4.3.6",
