@@ -49,10 +49,10 @@
     ]
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "1.21.1",
-    "@graphql-codegen/typed-document-node": "1.18.2",
-    "@graphql-codegen/typescript": "1.21.0",
-    "@graphql-codegen/typescript-operations": "1.17.14",
+    "@graphql-codegen/cli": "1.21.3",
+    "@graphql-codegen/typed-document-node": "1.18.4",
+    "@graphql-codegen/typescript": "1.21.1",
+    "@graphql-codegen/typescript-operations": "1.17.15",
     "@graphql-typed-document-node/core": "3.1.0",
     "@types/classnames": "2.2.11",
     "@types/react-router-dom": "5.1.7",
