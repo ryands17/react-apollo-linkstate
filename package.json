@@ -52,7 +52,7 @@
     "@graphql-codegen/cli": "2.0.1",
     "@graphql-codegen/typed-document-node": "2.0.0",
     "@graphql-codegen/typescript": "2.0.0",
-    "@graphql-codegen/typescript-operations": "2.0.0",
+    "@graphql-codegen/typescript-operations": "2.0.1",
     "@graphql-typed-document-node/core": "3.1.0",
     "@types/classnames": "2.3.0",
     "@types/react-router-dom": "5.1.8",
