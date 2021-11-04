@@ -23,21 +23,20 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: nodeModules-${{ hashFiles('**/yarn.lock') }}
+          key: nodeModules-v2-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            nodeModules-
+            nodeModules-v2-
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
       - name: Build
-        run: npm i -g serve && yarn build
+        run: npm i -g serve & yarn build
 
       - name: Run E2E Tests
         uses: cypress-io/github-action@v2
         with:
           record: false
-          env: 'HOST=http://localhost:5000'
+          env: 'HOST=http://localhost:3000'
           start: serve -s build
-          wait-on: 'http://localhost:5000'
-          wait-on-timeout: 120
+          wait-on: 'http://localhost:3000'
