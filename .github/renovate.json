@@ -2,7 +2,7 @@
   "extends": ["config:base"],
   "masterIssue": true,
   "automerge": true,
-  "schedule": ["on the 3 day of the month"],
+  "schedule": ["every 3 months on the 3 day of the month"],
   "packageRules": [
     {
       "packagePatterns": ["^@types/", "typesync"],

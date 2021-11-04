@@ -14,10 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use Node 12
+      - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 12.x
+          node-version: 14.x
 
       - name: Use cached node_modules
         uses: actions/cache@v2
@@ -31,7 +31,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build
-        run: npm i -g serve & yarn build
+        run: npm i -g serve && yarn build
 
       - name: Run E2E Tests
         uses: cypress-io/github-action@v2
@@ -39,4 +39,3 @@ jobs:
           record: false
           env: HOST=http://localhost:5000
           start: serve -s build
-          wait-on: http://localhost:5000
