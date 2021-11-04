@@ -1,11 +1,11 @@
-import * as React from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { taskOperations } from 'config/state'
 import { useQuery } from '@apollo/client'
 import { GetAllTasksDocument } from 'generated/typed-document-nodes'
-import Taskitem from './Taskitem'
+import { Taskitem } from './Taskitem'
 
-const Tasklist: React.FC<RouteComponentProps> = ({ location }) => {
+export const Tasklist = () => {
+  const location = useLocation()
   const { data } = useQuery(GetAllTasksDocument)
 
   return (
@@ -37,5 +37,3 @@ const Tasklist: React.FC<RouteComponentProps> = ({ location }) => {
     </section>
   )
 }
-
-export default withRouter(Tasklist)

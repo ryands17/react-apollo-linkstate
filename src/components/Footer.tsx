@@ -1,10 +1,11 @@
-import * as React from 'react'
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { taskOperations } from 'config/state'
 import { RemainingTasksDocument } from 'generated/typed-document-nodes'
 
-const Footer: React.FC<RouteComponentProps> = ({ location }) => {
+export const Footer = () => {
+  const location = useLocation()
   const { data } = useQuery(RemainingTasksDocument)
 
   return (
@@ -54,5 +55,3 @@ const Footer: React.FC<RouteComponentProps> = ({ location }) => {
     </footer>
   )
 }
-
-export default withRouter(Footer)

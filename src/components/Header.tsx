@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ENTER } from 'config/utils'
 import { taskOperations } from 'config/state'
 
-const Header: React.FC = () => {
+export const Header = () => {
   let [text, setText] = React.useState('')
 
   return (
@@ -23,5 +23,3 @@ const Header: React.FC = () => {
     </header>
   )
 }
-
-export default Header

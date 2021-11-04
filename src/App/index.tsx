@@ -3,11 +3,11 @@ import { HashRouter as Router } from 'react-router-dom'
 
 import './app.css'
 
-import Header from 'components/Header'
-import Footer from 'components/Footer'
-import Tasklist from 'components/Tasklist'
+import { Header } from 'components/Header'
+import { Footer } from 'components/Footer'
+import { Tasklist } from 'components/Tasklist'
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <Router>
       <div className="todoapp">

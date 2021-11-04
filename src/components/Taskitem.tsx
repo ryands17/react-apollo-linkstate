@@ -8,7 +8,7 @@ type Props = {
   task: Task
 }
 
-const Taskitem: React.FC<Props> = ({ task }) => {
+export const Taskitem = ({ task }: Props) => {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const [isEditing, setIsEditing] = React.useState(false)
   const [editText, setEditText] = React.useState('')
@@ -93,5 +93,3 @@ const Taskitem: React.FC<Props> = ({ task }) => {
     </li>
   )
 }
-
-export default Taskitem
