@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
 import { taskOperations } from 'config/state'
-import { RemainingTasksDocument } from 'generated/typed-document-nodes'
+import { useRemainingTasksQuery } from 'generated/queries'
 
 export const Footer = () => {
   const location = useLocation()
-  const { data } = useQuery(RemainingTasksDocument)
+  const { data } = useRemainingTasksQuery()
 
   return (
     <footer className="footer">

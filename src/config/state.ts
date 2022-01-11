@@ -1,6 +1,6 @@
 import { InMemoryCache, makeVar } from '@apollo/client'
 import { produce } from 'immer'
-import { Task } from 'generated/typed-document-nodes'
+import { Task } from 'generated/queries'
 import { uuidv4 } from './utils'
 
 export const cache: InMemoryCache = new InMemoryCache({

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import cx from 'classnames'
 import { ESCAPE_KEY, ENTER_KEY } from 'config/utils'
-import { Task } from 'generated/typed-document-nodes'
+import { Task } from 'generated/queries'
 import { taskOperations } from 'config/state'
 
 type Props = {

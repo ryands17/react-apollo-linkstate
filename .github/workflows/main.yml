@@ -23,9 +23,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: nodeModules-v2-${{ hashFiles('**/yarn.lock') }}
+          key: nodeModules-v3-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            nodeModules-v2-
+            nodeModules-v3-
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
