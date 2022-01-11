@@ -2,8 +2,10 @@ overwrite: true
 schema: schema.graphql
 documents: src/query.graphql
 generates:
-  ./src/generated/typed-document-nodes.ts:
+  ./src/generated/queries.ts:
     plugins:
       - typescript
       - typescript-operations
-      - typed-document-node
+      - typescript-react-apollo
+    config:
+      withHooks: true

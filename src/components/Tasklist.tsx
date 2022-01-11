@@ -1,12 +1,11 @@
 import { useLocation } from 'react-router-dom'
 import { taskOperations } from 'config/state'
-import { useQuery } from '@apollo/client'
-import { GetAllTasksDocument } from 'generated/typed-document-nodes'
+import { useGetAllTasksQuery } from 'generated/queries'
 import { Taskitem } from './Taskitem'
 
 export const Tasklist = () => {
   const location = useLocation()
-  const { data } = useQuery(GetAllTasksDocument)
+  const { data } = useGetAllTasksQuery()
 
   return (
     <section className="main">
