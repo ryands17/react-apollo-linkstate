@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "3.11.8",
-    "@types/jest": "29.5.5",
-    "@types/node": "20.10.6",
+    "@types/jest": "29.5.13",
+    "@types/node": "20.16.11",
     "@types/react": "18.3.11",
     "@types/react-dom": "18.3.0",
     "classnames": "2.5.1",
@@ -61,7 +61,7 @@
     "lint-staged": "12.5.0",
     "npm-run-all2": "6.2.3",
     "prettier": "3.3.3",
-    "typesync": "0.11.1"
+    "typesync": "0.13.0"
   },
   "lint-staged": {
     "*.{js,css,json,md,ts,tsx}": [
