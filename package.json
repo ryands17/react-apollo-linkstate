@@ -55,7 +55,7 @@
     "@graphql-codegen/typescript-react-apollo": "^3.2.3",
     "@types/classnames": "2.3.1",
     "@types/react-router-dom": "5.3.3",
-    "cypress": "9.7.0",
+    "cypress": "13.17.0",
     "dotenv-cli": "8.0.0",
     "husky": "8.0.3",
     "lint-staged": "12.5.0",
