@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "3.12.4",
-    "@types/jest": "29.5.5",
+    "@types/jest": "29.5.14",
     "@types/node": "22.10.5",
     "@types/react": "18.3.18",
     "@types/react-dom": "18.3.5",
@@ -53,7 +53,7 @@
     "@graphql-codegen/typescript": "2.8.8",
     "@graphql-codegen/typescript-operations": "2.5.13",
     "@graphql-codegen/typescript-react-apollo": "^3.2.3",
-    "@types/classnames": "2.3.1",
+    "@types/classnames": "2.3.4",
     "@types/react-router-dom": "5.3.3",
     "cypress": "9.7.0",
     "dotenv-cli": "8.0.0",
@@ -61,7 +61,7 @@
     "lint-staged": "12.5.0",
     "npm-run-all2": "6.2.6",
     "prettier": "3.4.2",
-    "typesync": "0.11.1"
+    "typesync": "0.14.0"
   },
   "lint-staged": {
     "*.{js,css,json,md,ts,tsx}": [
