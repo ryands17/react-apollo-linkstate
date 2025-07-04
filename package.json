@@ -58,7 +58,7 @@
     "cypress": "9.7.0",
     "dotenv-cli": "8.0.0",
     "husky": "9.1.7",
-    "lint-staged": "15.5.0",
+    "lint-staged": "15.5.2",
     "npm-run-all2": "7.0.2",
     "prettier": "3.5.3",
     "typesync": "0.14.3"
