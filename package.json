@@ -16,7 +16,7 @@
     "react-router-dom": "6.30.1",
     "react-scripts": "5.0.1",
     "todomvc-app-css": "2.4.3",
-    "typescript": "5.8.3"
+    "typescript": "5.9.3"
   },
   "scripts": {
     "dev": "run-p start generate:schema::watch",
