@@ -8018,10 +8018,10 @@ ignore@^5.1.4, ignore@^5.1.8:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.1.9.tgz#9ec1a5cbe8e1446ec60d4420060d43aa6e7382fb"
   integrity sha512-2zeMQpbKz5dhZ9IwL0gbxSW5w0NK/MSAMtNuhgIHEPmaU3vPdKPL0UdvUCXs5SS4JAwsBxysK5sFMW8ocFiVjQ==
 
-immer@11.1.9:
-  version "11.1.9"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-11.1.9.tgz#e0ce69359d29cafdb14fc5b6d2cd56f826097966"
-  integrity sha512-sc/z0Cyti70bZa0ZU4sWfAElfovFb9Ni8tArJZLuklYWxegPiK3pDOql1Rq5H0FIRAW9LSQRG6OX4KqBldbhBA==
+immer@11.1.11:
+  version "11.1.11"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-11.1.11.tgz#bbf825a333ae1b16fd450d8da5f61d54de6a553d"
+  integrity sha512-qzXuyXAkPySAGYkfsAwodDPWT8Zm7/Uo5BNt4BjhMhG5WlWyZZ4wQqnWwdS8kjlQ1Cwu6gjw3A6+0gTQwlyYtw==
 
 immer@^9.0.7:
   version "9.0.7"
